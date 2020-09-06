@@ -1,0 +1,49 @@
+server:
+  logging-level: panic
+  enable-instrumentation: false
+  block-headers: 
+    - "Client-Blocked-Header"
+  frontend:
+    address: localhost:18000
+  admin:
+    address: localhost:19000
+
+upstream:
+  backends:
+    - url: ws://localhost:20000
+      pass-headers:
+        - X-Server-Sent-Header
+    - url: ws://localhost:21000
+      pass-headers:
+        - X-Server-Sent-Header
+    - url: ws://localhost:22000
+      pass-headers:
+        - X-Server-Sent-Header
+    - url: ws://localhost:23000
+      pass-headers:
+        - X-Server-Sent-Header
+
+test-clients:
+  - endpoint: ws://localhost:18000/echo
+    ping-time: 10m
+
+test-backends:
+  - addr: localhost:20000
+    subprotocol:
+      - server-sub-one
+      - server-sub-two
+  - addr: localhost:21000
+    subprotocol:
+      - server-sub-one
+      - server-sub-two
+  - addr: localhost:22000
+    subprotocol:
+      - server-sub-one
+      - server-sub-two
+  - addr: localhost:23000
+    subprotocol:
+      - server-sub-one
+      - server-sub-two
+
+## top level test configuration 
+validate-test-leaks: true

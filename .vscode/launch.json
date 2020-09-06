@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "LaunchBalancer",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}",
+            "env": {"LOG_LEVEL":"INFO"},
+            "args": ["--config", "${workspaceFolder}/testdata/proxy-dev-config.yml"]
+        },
+        {
+            "name": "LaunchWithEnvOnly",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}",
+            "env": {"LOG_LEVEL":"INFO", "BE_URLS":"localhost:9091"},
+            "args": []
+        }
+    ]
+}
