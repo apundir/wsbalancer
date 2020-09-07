@@ -1,4 +1,9 @@
 # Websocket balancer
+
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/apundir/wsbalancer)](https://pkg.go.dev/github.com/apundir/wsbalancer)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/apundir/wsbalancer)](https://github.com/apundir/wsbalancer/releases)
+[![GitHub license](https://img.shields.io/github/license/apundir/wsbalancer)](https://github.com/apundir/wsbalancer/blob/master/LICENSE)
+
 Websocket balancer is a stateful reverse proxy for websockets. It distributes
 incoming websockets across multiple available backends. In addition to load
 balancing, the balancer also takes care of transparently switching from one
