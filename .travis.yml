@@ -1,0 +1,26 @@
+language: go
+
+branches:
+  only:
+  - master
+
+go:
+  - 1.14.x
+  - tip
+
+os:
+  - linux
+  - osx
+
+matrix:
+  allow_failures:
+    - go: tip
+
+env:
+  - GO111MODULE=on
+
+before_install:
+  - go get 
+
+script:
+  - go test -race -coverprofile=cover.out -coverpkg github.com/apundir/wsbalancer/in,github.com/apundir/wsbalancer/out,github.com/apundir/wsbalancer/inst,github.com/apundir/wsbalancer/cmd,github.com/apundir/wsbalancer/common ./... -args -parallel
