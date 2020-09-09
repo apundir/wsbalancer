@@ -250,6 +250,8 @@ func (tc *TestConfig) StartBalancer() {
 	tc.AdmSerer = cmd.BuildAdminServer(&tc.Server, tc.InManager)
 	go tc.FeServer.ListenAndServe()
 	go tc.AdmSerer.ListenAndServe()
+	// wait for Frontend and Admin servers to start before resuming test
+	time.Sleep(50 * time.Millisecond)
 }
 
 // StopBalancer closes frontend and admin http servers

@@ -18,6 +18,10 @@ import (
 // conducted with fully functional system using proper websocket backend servers
 // and websocket clients.
 
+var flagTestLogLevel = flag.String("loglevel", "panic", "logging level to kep for test")
+var flagTestParallel = flag.Bool("parallel", false, "execute tests in parallel, defaults to serial execution")
+var flagTestValidateLeaks = flag.Bool("check-for-leaks", true, "check for goroutine leaks after every test, defaults to true")
+
 type functionalTest struct {
 	Name string
 	TC   func(*testing.T, *it.TestConfig)
@@ -88,15 +92,8 @@ func (ft *functionalTest) validateLeaks(t *testing.T, config *it.TestConfig, ini
 	}
 }
 
-var flagTestLogLevel = flag.String("loglevel", "panic", "logging level to kep for test")
-var flagTestParallel = flag.Bool("parallel", false, "execute tests in parallel, defaults to serial execution")
-var flagTestValidateLeaks = flag.Bool("check-for-leaks", true, "check for goroutine leaks after every test, defaults to true")
-
-func init() {
-	cmd.SetLogLevel(*flagTestLogLevel)
-}
-
 func Test(t *testing.T) {
+	cmd.SetLogLevel(*flagTestLogLevel)
 	testWithConfig(t, "basics", it.GetOneBkConfig)
 	testWithConfig(t, "2bk", it.GetTwoBkConfig)
 	testWithConfig(t, "4bk", it.GetFourBkConfig)

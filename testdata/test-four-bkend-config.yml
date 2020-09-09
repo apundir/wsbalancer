@@ -11,15 +11,19 @@ server:
 upstream:
   backends:
     - url: ws://localhost:20000
+      breaker-threshold: 100000
       pass-headers:
         - X-Server-Sent-Header
     - url: ws://localhost:21000
+      breaker-threshold: 100000
       pass-headers:
         - X-Server-Sent-Header
     - url: ws://localhost:22000
+      breaker-threshold: 100000
       pass-headers:
         - X-Server-Sent-Header
     - url: ws://localhost:23000
+      breaker-threshold: 100000
       pass-headers:
         - X-Server-Sent-Header
 

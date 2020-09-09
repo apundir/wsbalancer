@@ -1,12 +1,20 @@
 package in
 
 import (
+	"flag"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/apundir/wsbalancer/common"
 )
+
+// these flags are defined here ONLY to satisfy global test launch configuration
+// flags. These are NOT actually used in these tests. If not defined than top
+// level nested tests starts to fail complaining flag provided but not defined.
+var flagTestLogLevel = flag.String("loglevel", "panic", "logging level to kep for test")
+var flagTestParallel = flag.Bool("parallel", false, "execute tests in parallel, defaults to serial execution")
+var flagTestValidateLeaks = flag.Bool("check-for-leaks", true, "check for goroutine leaks after every test, defaults to true")
 
 type mockBackendAdmin struct{}
 

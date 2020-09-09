@@ -3,10 +3,15 @@ package cmd
 import (
 	"net/http"
 	"strings"
+	"sync"
 
 	"github.com/apundir/wsbalancer/in"
 	"github.com/apundir/wsbalancer/inst"
 	slog "github.com/go-eden/slf4go"
+)
+
+var (
+	logLevelOnce *sync.Once = &sync.Once{}
 )
 
 // BuildFrontendServer builds http server for handling frontend websocket
@@ -52,20 +57,22 @@ func BuildAdminServer(cfg *in.ServerConfig, inMgr *in.Manager) *http.Server {
 // SetLogLevel sets the global log level for balancer. This method shall be
 // called as early as possible in the initialization phases.
 func SetLogLevel(level string) {
-	switch strings.ToUpper(level) {
-	case "TRACE":
-		slog.SetLevel(slog.TraceLevel)
-	case "DEBUG":
-		slog.SetLevel(slog.DebugLevel)
-	case "INFO":
-		slog.SetLevel(slog.InfoLevel)
-	case "WARN":
-		slog.SetLevel(slog.WarnLevel)
-	case "PANIC":
-		slog.SetLevel(slog.PanicLevel)
-	case "FATAL":
-		slog.SetLevel(slog.FatalLevel)
-	default:
-		slog.SetLevel(slog.PanicLevel)
-	}
+	logLevelOnce.Do(func() {
+		switch strings.ToUpper(level) {
+		case "TRACE":
+			slog.SetLevel(slog.TraceLevel)
+		case "DEBUG":
+			slog.SetLevel(slog.DebugLevel)
+		case "INFO":
+			slog.SetLevel(slog.InfoLevel)
+		case "WARN":
+			slog.SetLevel(slog.WarnLevel)
+		case "PANIC":
+			slog.SetLevel(slog.PanicLevel)
+		case "FATAL":
+			slog.SetLevel(slog.FatalLevel)
+		default:
+			slog.SetLevel(slog.PanicLevel)
+		}
+	})
 }

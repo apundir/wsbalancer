@@ -97,8 +97,8 @@ func breakerDisableTest(t *testing.T, config *it.TestConfig) {
 }
 
 func breakerTripTestWith(t *testing.T, config *it.TestConfig, useTimeWait bool) {
-	// replace all backend with updated configuration which
-	// disable the breaker altogether
+	// replace all backend with updated configuration which trips the backend
+	// faster so as to make sure we are able to test this condition faster.
 	bkList := it.GetAdminBackendList(t, config)
 	bkCfg := make([]*it.NewBackendData, len(bkList))
 	breakerTestThreshold := 2
@@ -142,7 +142,7 @@ func breakerTripTestWith(t *testing.T, config *it.TestConfig, useTimeWait bool) 
 	}
 	// Wait for all clients attempts to complete
 	connectWg.Wait()
-	// verify all backends are still reported as NOT tripped
+	// verify all backends are reported as tripped
 	newBkList := it.GetAdminBackendList(t, config)
 	for _, bk := range newBkList {
 		if bk.TotalFailures < breakerTestThreshold {
