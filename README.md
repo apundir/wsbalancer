@@ -1,6 +1,7 @@
 # Websocket balancer
 
 [![PkgGoDev](https://pkg.go.dev/badge/github.com/apundir/wsbalancer)](https://pkg.go.dev/github.com/apundir/wsbalancer)
+[![Build Status](https://travis-ci.com/apundir/wsbalancer.svg?branch=master)](https://travis-ci.com/apundir/wsbalancer)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/apundir/wsbalancer)](https://github.com/apundir/wsbalancer/releases)
 [![GitHub license](https://img.shields.io/github/license/apundir/wsbalancer)](https://github.com/apundir/wsbalancer/blob/master/LICENSE)
 
