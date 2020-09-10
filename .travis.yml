@@ -24,4 +24,7 @@ before_install:
   - go get 
 
 script:
-  - go test -race -coverprofile=cover.out -coverpkg github.com/apundir/wsbalancer/in,github.com/apundir/wsbalancer/out,github.com/apundir/wsbalancer/inst,github.com/apundir/wsbalancer/cmd,github.com/apundir/wsbalancer/common ./... -args -parallel
+  - go test -race -coverprofile=coverage.txt -coverpkg github.com/apundir/wsbalancer/in,github.com/apundir/wsbalancer/out,github.com/apundir/wsbalancer/inst,github.com/apundir/wsbalancer/cmd,github.com/apundir/wsbalancer/common ./... -args -parallel
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

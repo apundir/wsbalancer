@@ -21,16 +21,15 @@ balancer is a little stripped down version having NO OCPP extension or
 knowledge what so ever and is designed to work in ANY websocket scenario
 including that of OCPP.
 
-The documenation of wsbalancer is activly being updated. Most of the updates 
+The documentation of wsbalancer is actively being updated. Most of the updates
 will happen within godoc and as such will be available on godoc site as well
 as within your favorite editor should you wish you use wsbalancer as a library.
 
 ## General overview
 
-
 Following diagram illustrate the outline of the balancer.
 <pre>
-          ______________
+           ______________
           |              |
  Incoming |              |         +----> Backend 1
  Websocket|              |         |         :
@@ -151,7 +150,7 @@ Environment variables:
   BE_BREAKER_THRESHOLD int
         Backend circuit breaker threshold
   BE_HANDSHAKE_TIMEOUT int64
-        Backend webSocket handshaked timeout
+        Backend webSocket handshake timeout
   BE_PASS_HEADERS slice
         Headers to pass from B/E to F/E, comma separated
   BE_ABNORMAL_CLOSE_CODES slice
